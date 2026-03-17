@@ -8,6 +8,7 @@ dist/
 node_modules/
 
 # logs
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
@@ -16,9 +17,24 @@ pnpm-debug.log*
 # environment variables
 .env
 .env.production
+.env.[oa]*
+.env.local
+.env.*.local
 
-# macOS-specific files
+# OS-specific files
 .DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
 
-# jetbrains setting folder
+# IDEs and editors
 .idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# agentes antigravity
+.agents/

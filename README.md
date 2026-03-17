@@ -1,46 +1,66 @@
-# Astro Starter Kit: Basics
+# Website Architect Area94
 
-```sh
-npm create astro@latest -- --template basics
+
+## Descripción
+Landing page profesional para **Área 94**, empresa especializada en arquitectura, gestión urbanística y desarrollo inmobiliario integral.
+
+The application includes:
+- A hero section with a two‑column layout on desktop.
+- A catalog of projects displayed in a responsive grid.
+- An "About Us" section with styled cards.
+- A contact form with server‑side handling via an API route.
+- Navigation and interactive elements that match the design spec.
+
+## Tech Stack
+
+- **Framework**: Astro (static site generator)
+- **Language**: TypeScript for API routes, Astro components for UI
+- **Styling**: Vanilla CSS with CSS Grid and Flexbox, using the **Montserrat** and **Inter** fonts.
+- **Build Tool**: Vite (via Astro)
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v18 or later)
+- npm (v9 or later)
+
+### Installation
+
+```bash
+# Clone the repository
+git clone <repository-url>
+cd website-architect
+
+# Install dependencies
+npm install
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+### Development Server
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+```bash
+npm run dev
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+The site will be available at `http://localhost:4321`.
 
-## 🧞 Commands
+### Build for Production
 
-All commands are run from the root of the project, from a terminal:
+```bash
+npm run build
+```
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+The compiled site will be output to the `dist/` directory.
 
-## 👀 Want to learn more?
+### Preview Production Build
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+```bash
+npm run preview
+```
+
+## Key Components
+
+- **Hero.astro** – Two‑column hero on desktop, stacked on smaller screens.
+- **Proyectos.astro** – Responsive project catalog (4‑col desktop, 2‑col tablet, 1‑col mobile).
+- **Nosotros.astro** – "About Us" section with three styled cards.
+- **Contact API (`src/pages/api/contact.ts`)** – Handles form submissions via SMTP (configured in environment variables).

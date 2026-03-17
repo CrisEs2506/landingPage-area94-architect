@@ -1,0 +1,296 @@
+---
+import { Image } from "astro:assets";
+import nosotrosImg from "../assets/Nosotros.png";
+---
+
+<section class="nosotros-section" id="nosotros">
+  <div class="nosotros-container">
+    <!-- Left Column -->
+    <div class="nosotros-content">
+      <h2 class="title">Nosotros</h2>
+      <p class="subtitle">
+        <strong>Área 94 (A94)</strong> es una empresa familiar con más de diez años
+        de experiencia en proyectos inmobiliarios, comerciales y residenciales, integrando
+        Arquitectura y Gestión Legal.
+      </p>
+
+      <Image
+        src={nosotrosImg}
+        alt="Estructura de casa transparente, diseño arquitectónico"
+        class="main-img"
+      />
+    </div>
+
+    <!-- Right Column: Cards -->
+    <div class="cards-column">
+      <!-- Card 1 -->
+      <div class="info-card">
+        <div class="card-img-wrapper">
+          <img
+            src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=200&auto=format&fit=crop"
+            alt="Identidad"
+            class="card-img"
+          />
+        </div>
+        <div class="card-text">
+          <h3 class="card-title">Identidad</h3>
+          <p class="card-desc">
+            Acompañamos cada proyecto desde su concepción hasta su venta final,
+            con control técnico y normativo.
+          </p>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="info-card">
+        <div class="card-img-wrapper">
+          <img
+            src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=200&auto=format&fit=crop"
+            alt="Desarrollo"
+            class="card-img"
+          />
+        </div>
+        <div class="card-text">
+          <h3 class="card-title">Desarrollo</h3>
+          <p class="card-desc">
+            Desarrollamos proyectos de forma integral: gestión del suelo, diseño
+            arquitectónico, licenciamiento urbanístico y obra civil, junto con
+            impulso comercial.
+          </p>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="info-card">
+        <div class="card-img-wrapper">
+          <img
+            src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=200&auto=format&fit=crop"
+            alt="Estrategia"
+            class="card-img"
+          />
+        </div>
+        <div class="card-text">
+          <h3 class="card-title">Estrategia</h3>
+          <p class="card-desc">
+            Cada proyecto se aborda como un proceso estratégico, analizando
+            contexto y visión del cliente frente a retos técnicos, legales y
+            comerciales.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .nosotros-section {
+    padding: 46px 32px;
+    background-color: var(--bg); /* Body white */
+    display: flex;
+    justify-content: center;
+  }
+
+  .nosotros-container {
+    max-width: 1600px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr; /* Match Hero proportions */
+    gap: 64px;
+    align-items: stretch; /* Cambio: stretch para que la columna izquierda tenga el mismo alto que las tarjetas */
+  }
+
+  /* Left Column */
+  .nosotros-content {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    height: 100%;
+    min-height: 0; /* Permite a los hijos flex contraerse más allá de su tamaño intrínseco */
+  }
+
+  .title {
+    font-size: clamp(32px, 3.5vw, 44px);
+    font-weight: 600;
+    color: var(--primary);
+    margin: 0;
+    line-height: 1.15;
+    letter-spacing: -0.5px;
+  }
+
+  .subtitle {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--secondary);
+    margin: 0;
+    max-width: 95%;
+  }
+
+  .subtitle strong {
+    color: var(--primary);
+  }
+
+  .main-img {
+    margin-top: auto; /* Empuja la imagen hacia el final (abajo) para alinearse con la última tarjeta */
+    width: 100%;
+    flex: 1; /* Permite que tome el espacio sobrante sin forzarse a crecer */
+    min-height: 0; /* Crucial: evita que el tamaño intrínseco de la imagen rompa la columna */
+    max-height: 320px; /* Limita el alto asegurando que no exceda el alto total impuesto por las tarjetas */
+    object-fit: contain; /* Ajusta la imagen completa en el recuadro sin recortar */
+    object-position: left bottom; /* Ancla la imagen abajo a la izquierda */
+    mix-blend-mode: normal; /* Es un PNG transparente, no necesita blend mode */
+  }
+
+  /* Right Column */
+  .cards-column {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .info-card {
+    background-color: var(--primary); /* Black, same as primary button */
+    border-radius: 24px;
+    display: flex;
+    align-items: stretch;
+    padding: 8px; /* Internal padding to create the small image border effect */
+    height: 160px;
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+
+  .info-card:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 16px 32px rgba(35, 39, 47, 0.2);
+  }
+
+  .card-img-wrapper {
+    width: 150px;
+    height: 100%;
+    flex-shrink: 0;
+  }
+
+  .card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 16px; /* Slightly less than the container to look nested perfectly */
+  }
+
+  .card-text {
+    padding: 16px 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+  }
+
+  .card-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 0 8px 0;
+    color: var(--accent); /* White */
+  }
+
+  .card-desc {
+    font-size: 13px;
+    line-height: 1.5;
+    color: rgba(
+      255,
+      255,
+      255,
+      0.75
+    ); /* Soft white/gray for better readability on black */
+    margin: 0;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 1199px) {
+    /* Tablet */
+    .nosotros-section {
+      padding: 40px 16px;
+    }
+    .nosotros-container {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+    .nosotros-content {
+      height: auto;
+      gap: 16px;
+    }
+    .title {
+      font-size: clamp(38px, 5vw, 42px);
+    }
+    .main-img {
+      max-height: none;
+      height: auto;
+      width: 100%;
+      flex: none; /* En tablet vuelve a su comportamiento normal */
+      object-fit: initial;
+      object-position: initial;
+    }
+    .cards-column {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    /* Mobile */
+    .nosotros-section {
+      padding: 24px 16px;
+    }
+    .nosotros-container {
+      gap: 32px;
+    }
+    .nosotros-content {
+      height: auto;
+      gap: 16px;
+    }
+    .title {
+      font-size: 32px;
+    }
+    .subtitle {
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    .main-img {
+      max-height: none;
+      height: auto;
+      width: 100%;
+      flex: none;
+      border-radius: 20px;
+      object-fit: initial;
+      object-position: initial;
+    }
+    .cards-column {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+    }
+    .info-card {
+      flex-direction: column;
+      height: auto;
+      width: 100%;
+      max-width: 380px;
+      padding: 12px;
+    }
+    .card-img-wrapper {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16 / 9; /* Ensure responsive nice aspect ratio on mobile */
+    }
+    .card-img {
+      border-radius: 16px;
+    }
+    .card-text {
+      padding: 16px;
+    }
+    .card-title {
+      font-size: 18px;
+      margin-bottom: 6px;
+    }
+  }
+</style>

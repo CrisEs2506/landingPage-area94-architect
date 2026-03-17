@@ -1,0 +1,459 @@
+---
+import { Image } from "astro:assets";
+
+// Import all images from assets eagerly
+const imagesGlob = import.meta.glob<{ default: ImageMetadata }>('../assets/**/*.png', { eager: true });
+
+const projectsData = [
+  { id: 'habitat_51', name: 'Hábitat 51' },
+  { id: 'edificio_santaEmilia', name: 'Edificio Santa Emilia' },
+  { id: 'edificio_importika', name: 'Edificio Importika' },
+  { id: 'glamping_portachuelo', name: 'Glamping Portachuelo' },
+  { id: 'heladeria_clubCam_elRancho', name: 'Heladería Club Camp.' },
+  { id: 'vestidores_clubCam_elRancho', name: 'Vestidores Club Camp.' },
+  { id: 'banos_clubCam_elRancho', name: 'Baños Club Campestre' },
+];
+
+function getImageUrl(projectId: string, fileName: string) {
+  return imagesGlob[`../assets/${projectId}/${fileName}`]?.default;
+}
+
+const projects = projectsData.map((proj, index) => {
+  const miniatura = getImageUrl(proj.id, 'Miniatura.png');
+  const portada = getImageUrl(proj.id, 'Portada.png');
+  
+  const numberedImages: ImageMetadata[] = [];
+  for (let i = 1; i <= 20; i++) {
+    const img = getImageUrl(proj.id, `${i}.png`);
+    if (img) numberedImages.push(img);
+  }
+
+  return {
+    ...proj,
+    index: String(index + 1).padStart(2, '0'),
+    miniatura,
+    popupImages: [portada, ...numberedImages].filter(Boolean) as ImageMetadata[]
+  };
+});
+---
+
+<section class="proyectos-section" id="proyectos">
+  <div class="proyectos-wrapper">
+    <div class="proyectos-content">
+      <div class="proyectos-header">
+        <h2 class="section-title">Nuestros Proyectos</h2>
+      </div>
+
+      <div class="swiper proyectos-carousel">
+        <div class="swiper-wrapper">
+          {projects.map((proj) => (
+            <div class="swiper-slide cursor-pointer" onclick={`openProjectModal('${proj.id}')`}>
+              <div class="proyecto-card">
+                {proj.miniatura && (
+                  <Image 
+                    src={proj.miniatura} 
+                    alt={`Miniatura del proyecto ${proj.name}`} 
+                    class="proyecto-img" 
+                    quality="max"
+                  />
+                )}
+                <div class="proyecto-overlay"></div>
+                
+                <div class="proyecto-info-top">
+                  <span class="proyecto-numero">{proj.index}</span>
+                  <h3 class="proyecto-nombre">{proj.name}</h3>
+                </div>
+
+                <!-- Lupa que aparece en hover -->
+                <div class="lupa-icon">
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    <line x1="11" y1="8" x2="11" y2="14"></line>
+                    <line x1="8" y1="11" x2="14" y2="11"></line>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Modals for each project -->
+{projects.map((proj) => (
+  <div id={`modal-${proj.id}`} class="project-modal" aria-hidden="true">
+    <div class="modal-backdrop" onclick={`closeProjectModal('${proj.id}')`}></div>
+    <div class="modal-content">
+      <button class="modal-close" onclick={`closeProjectModal('${proj.id}')`} aria-label="Cerrar modal">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      
+      <div class="modal-images-container">
+        {proj.popupImages.map((img, idx) => (
+          img && (
+            <Image 
+              src={img} 
+              alt={`${proj.name} - Imagen ${idx + 1}`} 
+              class="modal-img" 
+              quality="max"
+            />
+          )
+        ))}
+      </div>
+    </div>
+  </div>
+))}
+
+<style>
+  .proyectos-section {
+    padding: 28px; /* Mismo padding base que .hero-wrapper */
+    background-color: var(--bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .proyectos-wrapper {
+    width: 100%;
+    max-width: 1600px; /* Igual que hero-container */
+    display: flex;
+    justify-content: center;
+    min-width: 0; /* Vital para que Swiper no rompa el contenedor flex */
+  }
+
+  .proyectos-content {
+    background-color: var(--primary); /* Fondo oscuro del slider general */
+    border-radius: 4px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    color: var(--accent);
+    width: 100%;
+    max-width: 100%;
+    min-width: 0; /* Vital para limitar a los hijos flex */
+    overflow: hidden; /* Evita que el swiper se desborde fuera del borde redondeado */
+  }
+
+  .proyectos-header {
+    padding: 0 32px 32px 32px;
+    margin: 0 auto;
+  }
+
+  .section-title {
+    font-size: clamp(32px, 3.5vw, 44px);
+    font-weight: 600;
+    color: var(--accent); /* Titulo principal blanco */
+    margin: 0;
+    line-height: 1.15;
+    letter-spacing: -0.5px;
+    text-align: center;
+  }
+
+  /* Carousel */
+  .proyectos-carousel {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    /* No margin for full screen width inside .proyectos-content */
+  }
+
+  .swiper-slide {
+    height: 70vh; /* Slide alto como en la referencia */
+    min-height: 500px;
+    max-height: 800px;
+  }
+
+  .proyecto-card {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    cursor: pointer;
+    background-color: #1a1a1a;
+  }
+
+  .proyecto-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.6s ease;
+  }
+
+  .proyecto-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.7) 100%);
+    transition: background-color 0.4s ease;
+  }
+
+  /* Textos de la tarjeta estilo referencia */
+  .proyecto-info-top {
+    position: absolute;
+    top: 32px;
+    left: 32px;
+    z-index: 2;
+  }
+
+  .proyecto-numero {
+    font-size: 16px;
+    font-weight: 600;
+    color: #cca471; /* Accent color observed in screenshot '01' '02' */
+    margin-bottom: 8px;
+    display: block;
+    font-family: monospace; /* Gives it that technical feel */
+  }
+
+  .proyecto-nombre {
+    font-size: 20px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0;
+    line-height: 1.2;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+  }
+
+  .proyecto-info-bottom {
+    position: absolute;
+    bottom: 32px;
+    left: 32px;
+    z-index: 2;
+  }
+
+  /* Lupa Icon */
+  .lupa-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.5);
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(4px);
+    border-radius: 50%;
+    padding: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 3;
+    pointer-events: none; /* No intefiere con los clicks del card */
+    color: white;
+  }
+
+  /* Hover Effects */
+  .proyecto-card:hover .proyecto-img {
+    transform: scale(1.05); /* Ligeramente hacia el frente */
+  }
+
+  .proyecto-card:hover .proyecto-overlay {
+    background-color: rgba(35, 39, 47, 0.5); /* Oscurece al hover */
+  }
+
+  .proyecto-card:hover .lupa-icon {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  /* MODAL / POPUP */
+  .project-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Para permitir scroll scrollable content */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s;
+    overflow-y: auto; /* Permite scroll a todo el modal */
+    overflow-x: hidden;
+  }
+
+  .project-modal.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(20, 22, 26, 0.95); /* Muy oscuro */
+    z-index: -1;
+  }
+
+  .modal-close {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    background: rgba(255,255,255,0.1);
+    border: none;
+    color: white;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+    z-index: 100;
+  }
+
+  .modal-close:hover {
+    background: rgba(255,255,255,0.25);
+    transform: scale(1.1);
+  }
+
+  .modal-content {
+    width: 100%;
+    max-width: 1200px; /* Ancho máximo de las imágenes */
+    margin: 0 auto;
+    padding: 64px 20px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  .modal-images-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px; /* Separación entre las imágenes del mismo proyecto */
+    width: 100%;
+  }
+
+  .modal-img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    display: block;
+  }
+
+  /* Responsive Behavior */
+  @media (max-width: 1199px) { /* Tablet */
+    .proyectos-section {
+      padding: 16px;
+    }
+    .proyectos-content {
+      border-radius: 3px;
+    }
+    .proyectos-header {
+      padding: 0 16px 24px 16px;
+    }
+    .swiper-slide {
+      height: 60vh;
+    }
+    .proyecto-nombre {
+      font-size: 18px;
+    }
+    .modal-content {
+      padding: 48px 16px;
+    }
+  }
+
+  @media (max-width: 767px) { /* Mobile */
+    .proyectos-section {
+      padding: 0;
+    }
+    .proyectos-wrapper {
+      padding: 16px;
+    }
+    .proyectos-content {
+      border-radius: 2px;
+      padding-top: 24px;
+      padding-bottom: 24px;
+    }
+    .section-title {
+      font-size: 28px;
+    }
+    .swiper-slide {
+      height: 50vh;
+      min-height: 400px;
+    }
+    .proyecto-info-top {
+      top: 24px;
+      left: 20px;
+    }
+    .proyecto-info-bottom {
+      bottom: 24px;
+      left: 20px;
+    }
+    .proyecto-nombre {
+      font-size: 16px;
+    }
+    .modal-close {
+      top: 8px;
+      right: 8px;
+      width: 32px;
+      height: 32px;
+    }
+    .modal-content {
+      padding: 40px 12px;
+    }
+  }
+</style>
+
+<script is:inline>
+  // Handlers para el popup modal
+  function openProjectModal(id) {
+    const modal = document.getElementById(`modal-${id}`);
+    if (modal) {
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden'; // Previene fondo de hacer scroll
+    }
+  }
+
+  function closeProjectModal(id) {
+    const modal = document.getElementById(`modal-${id}`);
+    if (modal) {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  }
+</script>
+
+<!-- Inicialización de Swiper -->
+<script is:inline type="module">
+  import Swiper from "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs";
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const swiperProyectos = new Swiper(".proyectos-carousel", {
+      slidesPerView: 1.2, /* Deja asomar la siguiente tarjeta en móviles */
+      spaceBetween: 0, /* El de la imagen no tiene espacio, o tiene borde */
+      grabCursor: true,
+      loop: true,
+      speed: 1500, /* Transición suave y lenta */
+      autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
+      },
+      breakpoints: {
+        500: {
+          slidesPerView: 2,
+        },
+        768: {
+          slidesPerView: 3,
+        },
+        1200: {
+          slidesPerView: 4, /* Desktop como en la imagen de referencia */
+        },
+      },
+    });
+  });
+</script>
