@@ -28,7 +28,7 @@ La aplicación incluye:
 
 ```bash
 # Clonar el repositorio
-git clone <url-del-repositorio>
+git clone https://github.com/CrisEs2506/landingPage-area94-architect
 cd website-architect
 
 # Instalar dependencias
