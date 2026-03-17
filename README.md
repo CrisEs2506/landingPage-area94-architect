@@ -1,66 +1,65 @@
-# Website Architect Area94
-
+# Dashboard de Arquitectura Área94
 
 ## Descripción
 Landing page profesional para **Área 94**, empresa especializada en arquitectura, gestión urbanística y desarrollo inmobiliario integral.
 
-The application includes:
-- A hero section with a two‑column layout on desktop.
-- A catalog of projects displayed in a responsive grid.
-- An "About Us" section with styled cards.
-- A contact form with server‑side handling via an API route.
-- Navigation and interactive elements that match the design spec.
+La aplicación incluye:
+- Una sección hero con un diseño de dos columnas en escritorio.
+- Un catálogo de proyectos mostrado en una cuadrícula responsiva.
+- Una sección "Sobre Nosotros" con tarjetas estilizadas.
+- Un formulario de contacto con manejo del lado del servidor mediante una ruta API.
+- Navegación y elementos interactivos que coinciden con el diseño especificado.
 
-## Tech Stack
+## Tecnologías
 
-- **Framework**: Astro (static site generator)
-- **Language**: TypeScript for API routes, Astro components for UI
-- **Styling**: Vanilla CSS with CSS Grid and Flexbox, using the **Montserrat** and **Inter** fonts.
-- **Build Tool**: Vite (via Astro)
+- **Framework**: Astro (generador de sitios estáticos)
+- **Lenguaje**: TypeScript para rutas API y componentes Astro para la UI
+- **Estilos**: CSS vanilla con CSS Grid y Flexbox, usando las fuentes **Montserrat** y **Inter**.
+- **Herramienta de compilación**: Vite (a través de Astro)
 
-## Getting Started
+## Empezando
 
-### Prerequisites
+### Requisitos previos
 
-- Node.js (v18 or later)
-- npm (v9 or later)
+- Node.js (v18 o superior)
+- npm (v9 o superior)
 
-### Installation
+### Instalación
 
 ```bash
-# Clone the repository
-git clone <repository-url>
+# Clonar el repositorio
+git clone <url-del-repositorio>
 cd website-architect
 
-# Install dependencies
+# Instalar dependencias
 npm install
 ```
 
-### Development Server
+### Servidor de desarrollo
 
 ```bash
 npm run dev
 ```
 
-The site will be available at `http://localhost:4321`.
+El sitio estará disponible en `http://localhost:4321`.
 
-### Build for Production
+### Construcción para producción
 
 ```bash
 npm run build
 ```
 
-The compiled site will be output to the `dist/` directory.
+El sitio compilado se generará en el directorio `dist/`.
 
-### Preview Production Build
+### Vista previa de la construcción
 
 ```bash
 npm run preview
 ```
 
-## Key Components
+## Componentes clave
 
-- **Hero.astro** – Two‑column hero on desktop, stacked on smaller screens.
-- **Proyectos.astro** – Responsive project catalog (4‑col desktop, 2‑col tablet, 1‑col mobile).
-- **Nosotros.astro** – "About Us" section with three styled cards.
-- **Contact API (`src/pages/api/contact.ts`)** – Handles form submissions via SMTP (configured in environment variables).
+- **Hero.astro** – Hero de dos columnas en escritorio, apilado en pantallas más pequeñas.
+- **Proyectos.astro** – Catálogo de proyectos responsivo (4 columnas en escritorio, 2 en tablet, 1 en móvil).
+- **Nosotros.astro** – Sección "Sobre Nosotros" con tres tarjetas estilizadas.
+- **API de contacto (`src/pages/api/contact.ts`)** – Gestiona el envío del formulario mediante SMTP (configurado en variables de entorno).
