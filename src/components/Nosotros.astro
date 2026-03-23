@@ -1,6 +1,9 @@
 ---
 import { Image } from "astro:assets";
 import nosotrosImg from "../assets/Nosotros.png";
+import identidadImg from "../assets/Identidad.png";
+import desarrolloImg from "../assets/Desarrollo.png";
+import estrategiaImg from "../assets/Estrategia.png";
 ---
 
 <section class="nosotros-section" id="nosotros">
@@ -9,9 +12,9 @@ import nosotrosImg from "../assets/Nosotros.png";
     <div class="nosotros-content">
       <h2 class="title">Nosotros</h2>
       <p class="subtitle">
-        <strong>Área 94 (A94)</strong> es una empresa familiar con más de diez años
-        de experiencia en proyectos inmobiliarios, comerciales y residenciales, integrando
-        Arquitectura y Gestión Legal.
+        <strong>Área 94 (A94)</strong> impulsa inversiones inmobiliarias con más de
+        diez años de experiencia en proyectos comerciales y residenciales, integrando
+        Arquitectura y Gestión Legal estratégica integral.
       </p>
 
       <Image
@@ -26,17 +29,13 @@ import nosotrosImg from "../assets/Nosotros.png";
       <!-- Card 1 -->
       <div class="info-card">
         <div class="card-img-wrapper">
-          <img
-            src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=200&auto=format&fit=crop"
-            alt="Identidad"
-            class="card-img"
-          />
+          <Image src={identidadImg} alt="Identidad" class="card-img" />
         </div>
         <div class="card-text">
           <h3 class="card-title">Identidad</h3>
           <p class="card-desc">
-            Acompañamos cada proyecto desde su concepción hasta su venta final,
-            con control técnico y normativo.
+            En Área 94 convertimos proyectos inmobiliarios en inversiones mejor
+            estructuradas, más seguras y con mayor potencial de valorización.
           </p>
         </div>
       </div>
@@ -44,18 +43,13 @@ import nosotrosImg from "../assets/Nosotros.png";
       <!-- Card 2 -->
       <div class="info-card">
         <div class="card-img-wrapper">
-          <img
-            src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=200&auto=format&fit=crop"
-            alt="Desarrollo"
-            class="card-img"
-          />
+          <Image src={desarrolloImg} alt="Desarrollo" class="card-img" />
         </div>
         <div class="card-text">
           <h3 class="card-title">Desarrollo</h3>
           <p class="card-desc">
-            Desarrollamos proyectos de forma integral: gestión del suelo, diseño
-            arquitectónico, licenciamiento urbanístico y obra civil, junto con
-            impulso comercial.
+            Integramos suelo, diseño, licenciamiento y obra para transformar
+            oportunidades en activos viables, rentables y comercializables.
           </p>
         </div>
       </div>
@@ -63,18 +57,13 @@ import nosotrosImg from "../assets/Nosotros.png";
       <!-- Card 3 -->
       <div class="info-card">
         <div class="card-img-wrapper">
-          <img
-            src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=200&auto=format&fit=crop"
-            alt="Estrategia"
-            class="card-img"
-          />
+          <Image src={estrategiaImg} alt="Estrategia" class="card-img" />
         </div>
         <div class="card-text">
           <h3 class="card-title">Estrategia</h3>
           <p class="card-desc">
-            Cada proyecto se aborda como un proceso estratégico, analizando
-            contexto y visión del cliente frente a retos técnicos, legales y
-            comerciales.
+            Analizamos cada proyecto con visión técnica, legal y comercial para
+            proteger la inversión y potenciar su retorno.
           </p>
         </div>
       </div>
@@ -84,7 +73,7 @@ import nosotrosImg from "../assets/Nosotros.png";
 
 <style>
   .nosotros-section {
-    padding: 46px 32px;
+    padding: 26px 16px;
     background-color: var(--bg); /* Body white */
     display: flex;
     justify-content: center;
@@ -95,7 +84,7 @@ import nosotrosImg from "../assets/Nosotros.png";
     width: 100%;
     display: grid;
     grid-template-columns: 1.05fr 0.95fr; /* Match Hero proportions */
-    gap: 64px;
+    gap: 44px;
     align-items: stretch; /* Cambio: stretch para que la columna izquierda tenga el mismo alto que las tarjetas */
   }
 
@@ -109,6 +98,7 @@ import nosotrosImg from "../assets/Nosotros.png";
   }
 
   .title {
+    padding-left: 6px;
     font-size: clamp(32px, 3.5vw, 44px);
     font-weight: 600;
     color: var(--primary);
@@ -118,11 +108,12 @@ import nosotrosImg from "../assets/Nosotros.png";
   }
 
   .subtitle {
+    padding-left: 6px;
     font-size: 15px;
     line-height: 1.6;
     color: var(--secondary);
     margin: 0;
-    max-width: 95%;
+    max-width: 100%;
   }
 
   .subtitle strong {
@@ -134,9 +125,9 @@ import nosotrosImg from "../assets/Nosotros.png";
     width: 100%;
     flex: 1; /* Permite que tome el espacio sobrante sin forzarse a crecer */
     min-height: 0; /* Crucial: evita que el tamaño intrínseco de la imagen rompa la columna */
-    max-height: 320px; /* Limita el alto asegurando que no exceda el alto total impuesto por las tarjetas */
+    max-height: 350px; /* Limita el alto asegurando que no exceda el alto total impuesto por las tarjetas */
     object-fit: contain; /* Ajusta la imagen completa en el recuadro sin recortar */
-    object-position: left bottom; /* Ancla la imagen abajo a la izquierda */
+    /*object-position: left bottom;*/ /* Ancla la imagen abajo a la izquierda */
     mix-blend-mode: normal; /* Es un PNG transparente, no necesita blend mode */
   }
 
@@ -208,11 +199,13 @@ import nosotrosImg from "../assets/Nosotros.png";
   @media (max-width: 1199px) {
     /* Tablet */
     .nosotros-section {
-      padding: 40px 16px;
+      padding: 26px 16px;
+      padding-top: 5px;
+      padding-bottom: 16px;
     }
     .nosotros-container {
       grid-template-columns: 1fr;
-      gap: 48px;
+      gap: 30px;
     }
     .nosotros-content {
       height: auto;
@@ -224,7 +217,8 @@ import nosotrosImg from "../assets/Nosotros.png";
     .main-img {
       max-height: none;
       height: auto;
-      width: 100%;
+      width: 75%;
+      align-self: center;
       flex: none; /* En tablet vuelve a su comportamiento normal */
       object-fit: initial;
       object-position: initial;
@@ -240,6 +234,7 @@ import nosotrosImg from "../assets/Nosotros.png";
     /* Mobile */
     .nosotros-section {
       padding: 24px 16px;
+      padding-top: 5px;
     }
     .nosotros-container {
       gap: 32px;
@@ -258,7 +253,8 @@ import nosotrosImg from "../assets/Nosotros.png";
     .main-img {
       max-height: none;
       height: auto;
-      width: 100%;
+      width: 75%;
+      align-self: center;
       flex: none;
       border-radius: 20px;
       object-fit: initial;
@@ -279,8 +275,7 @@ import nosotrosImg from "../assets/Nosotros.png";
     }
     .card-img-wrapper {
       width: 100%;
-      height: auto;
-      aspect-ratio: 16 / 9; /* Ensure responsive nice aspect ratio on mobile */
+      height: 140px; /* Reduced height to make images smaller */
     }
     .card-img {
       border-radius: 16px;
