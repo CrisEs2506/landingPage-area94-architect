@@ -1,8 +1,8 @@
 ---
 import { Image } from "astro:assets";
 
-// Import all images from assets eagerly
-const imagesGlob = import.meta.glob<{ default: ImageMetadata }>('../assets/**/*.png', { eager: true });
+// Import all images from assets eagerly with multiple extensions
+const imagesGlob = import.meta.glob<{ default: ImageMetadata }>('../assets/**/*.{png,jpg,jpeg,webp}', { eager: true });
 
 const projectsData = [
   { id: 'habitat_51', name: 'Hábitat 51' },
@@ -14,17 +14,24 @@ const projectsData = [
   { id: 'banos_clubCam_elRancho', name: 'Baños Club Campestre' },
 ];
 
-function getImageUrl(projectId: string, fileName: string) {
-  return imagesGlob[`../assets/${projectId}/${fileName}`]?.default;
+function getImageUrl(projectId: string, fileNameWithoutExt: string) {
+  // Buscamos cuál de las extensiones coincide para ese archivo
+  for (const ext of ['png', 'jpg', 'jpeg', 'webp']) {
+    const key = `../assets/${projectId}/${fileNameWithoutExt}.${ext}`;
+    if (imagesGlob[key]) {
+      return imagesGlob[key].default;
+    }
+  }
+  return undefined;
 }
 
 const projects = projectsData.map((proj, index) => {
-  const miniatura = getImageUrl(proj.id, 'Miniatura.png');
-  const portada = getImageUrl(proj.id, 'Portada.png');
+  const miniatura = getImageUrl(proj.id, 'Miniatura');
+  const portada = getImageUrl(proj.id, 'Portada');
   
   const numberedImages: ImageMetadata[] = [];
   for (let i = 1; i <= 20; i++) {
-    const img = getImageUrl(proj.id, `${i}.png`);
+    const img = getImageUrl(proj.id, `${i}`);
     if (img) numberedImages.push(img);
   }
 

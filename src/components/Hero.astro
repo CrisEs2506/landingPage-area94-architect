@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
 import logoImg from "../assets/Logo.png";
 import homeInicialImg from "../assets/HomeInicial.png";
 ---
@@ -76,11 +77,9 @@ import homeInicialImg from "../assets/HomeInicial.png";
         <div class="swiper-wrapper stats-row">
           <div class="swiper-slide">
             <div class="stat-card">
-              <img
-                src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=100&auto=format&fit=crop"
-                class="stat-avatar"
-                alt="Planificación"
-              />
+              <div class="stat-avatar" aria-label="Arquitectura">
+                <Icon name="lucide:pencil-ruler" width={16} height={16} />
+              </div>
               <div class="stat-desc">
                 <strong>Arquitectura</strong><br />Estructuramos proyectos con
                 visión técnica y financiera para maximizar tu inversión.
@@ -90,11 +89,9 @@ import homeInicialImg from "../assets/HomeInicial.png";
 
           <div class="swiper-slide">
             <div class="stat-card">
-              <img
-                src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=100&auto=format&fit=crop"
-                class="stat-avatar"
-                alt="Licenciamiento"
-              />
+              <div class="stat-avatar" aria-label="Diseño">
+                <Icon name="lucide:pen-tool" width={16} height={16} />
+              </div>
               <div class="stat-desc">
                 <strong>Diseño</strong><br />Diseñamos espacios que aumentan el
                 valor comercial, el atractivo y la rentabilidad del proyecto.
@@ -104,11 +101,9 @@ import homeInicialImg from "../assets/HomeInicial.png";
 
           <div class="swiper-slide">
             <div class="stat-card">
-              <img
-                src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=100&auto=format&fit=crop"
-                class="stat-avatar"
-                alt="Construcción"
-              />
+              <div class="stat-avatar" aria-label="Construcción">
+                <Icon name="lucide:hard-hat" width={16} height={16} />
+              </div>
               <div class="stat-desc">
                 <strong>Construcción</strong><br />Ejecutamos adecuaciones y
                 reparaciones que valorizan el inmueble y mejoran su retorno.
@@ -118,11 +113,9 @@ import homeInicialImg from "../assets/HomeInicial.png";
 
           <div class="swiper-slide">
             <div class="stat-card">
-              <img
-                src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=100&auto=format&fit=crop"
-                class="stat-avatar"
-                alt="Reglamentos"
-              />
+              <div class="stat-avatar" aria-label="Urbanismo">
+                <Icon name="lucide:map" width={16} height={16} />
+              </div>
               <div class="stat-desc">
                 <strong>Urbanismo</strong><br />Analizamos títulos, normas y
                 riesgos legales para que inviertas con seguridad y viabilidad.
@@ -424,12 +417,24 @@ import homeInicialImg from "../assets/HomeInicial.png";
     top: -16px;
     left: 50%;
     transform: translateX(-50%);
-    width: 32px;
-    height: 32px;
+    width: 38px;
+    height: 38px;
     border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid #ffffff; /* Borde blanco para el marcado contraste con el grid de atrás */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    color: var(--primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid var(--surface-gray);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  }
+
+  .stat-avatar svg {
+    margin: 0;
+    padding: 0;
+    display: block;
+    width: 18px;
+    height: 18px;
   }
 
   .stat-desc {
