@@ -121,9 +121,6 @@
               <a href="mailto:contacto@area-94.com" class="info-link"
                 >contacto@area-94.com</a
               >
-              <a href="mailto:proyectos@area-94.com" class="info-link"
-                >proyectos@area-94.com</a
-              >
             </div>
           </div>
 
@@ -146,7 +143,7 @@
             </div>
             <div class="info-text">
               <span class="info-value">Cra 6 # 4 – 34</span>
-              <span class="info-sub">Bogotá, Colombia</span>
+              <span class="info-sub">Cajicá, Cundinamarca</span>
             </div>
           </div>
 
@@ -222,6 +219,8 @@
 <style>
   .contacto-section {
     padding: 28px;
+    padding-top: 5px;
+    padding-bottom: 12px;
     background-color: var(--bg);
     display: flex;
     justify-content: center;
@@ -238,7 +237,7 @@
   .contacto-content {
     background-color: var(--primary);
     border-radius: 4px;
-    padding: 80px 48px;
+    padding: 40px 48px;
     color: var(--accent);
     width: 100%;
   }
@@ -363,7 +362,7 @@
 
   .info-block {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     gap: 16px;
   }
 
@@ -522,22 +521,26 @@
 </style>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('contacto-form') as HTMLFormElement | null;
-    const submitBtn = document.getElementById('contacto-submit') as HTMLButtonElement | null;
+  document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById(
+      "contacto-form",
+    ) as HTMLFormElement | null;
+    const submitBtn = document.getElementById(
+      "contacto-submit",
+    ) as HTMLButtonElement | null;
     if (!form || !submitBtn) return;
 
     const originalBtnHTML = submitBtn.innerHTML;
 
     // ── Toast notification ──
-    function showToast(message: string, type: 'success' | 'error') {
+    function showToast(message: string, type: "success" | "error") {
       // Remove previous toast if any
-      const existing = document.getElementById('contacto-toast');
+      const existing = document.getElementById("contacto-toast");
       if (existing) existing.remove();
 
-      const toast = document.createElement('div');
-      toast.id = 'contacto-toast';
-      toast.setAttribute('role', 'alert');
+      const toast = document.createElement("div");
+      toast.id = "contacto-toast";
+      toast.setAttribute("role", "alert");
       toast.style.cssText = `
         position: fixed;
         bottom: 32px;
@@ -557,62 +560,77 @@
         display: flex;
         align-items: center;
         gap: 12px;
-        background: ${type === 'success' ? '#1a7a3a' : '#c0392b'};
+        background: ${type === "success" ? "#1a7a3a" : "#c0392b"};
       `;
 
-      const icon = type === 'success'
-        ? `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>`
-        : `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>`;
+      const icon =
+        type === "success"
+          ? `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>`
+          : `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>`;
 
       toast.innerHTML = `${icon}<span>${message}</span>`;
       document.body.appendChild(toast);
 
       // Trigger animation
       requestAnimationFrame(() => {
-        toast.style.opacity = '1';
-        toast.style.transform = 'translateY(0)';
+        toast.style.opacity = "1";
+        toast.style.transform = "translateY(0)";
       });
 
       // Auto dismiss
       setTimeout(() => {
-        toast.style.opacity = '0';
-        toast.style.transform = 'translateY(20px)';
+        toast.style.opacity = "0";
+        toast.style.transform = "translateY(20px)";
         setTimeout(() => toast.remove(), 400);
       }, 5000);
     }
 
     // ── Validation ──
     function validateForm(): boolean {
-      const nombre = (document.getElementById('contacto-nombre') as HTMLInputElement).value.trim();
-      const correo = (document.getElementById('contacto-correo') as HTMLInputElement).value.trim();
-      const mensaje = (document.getElementById('contacto-mensaje') as HTMLTextAreaElement).value.trim();
+      const nombre = (
+        document.getElementById("contacto-nombre") as HTMLInputElement
+      ).value.trim();
+      const correo = (
+        document.getElementById("contacto-correo") as HTMLInputElement
+      ).value.trim();
+      const mensaje = (
+        document.getElementById("contacto-mensaje") as HTMLTextAreaElement
+      ).value.trim();
 
       if (!nombre) {
-        showToast('Por favor ingresa tu nombre.', 'error');
-        (document.getElementById('contacto-nombre') as HTMLInputElement).focus();
+        showToast("Por favor ingresa tu nombre.", "error");
+        (
+          document.getElementById("contacto-nombre") as HTMLInputElement
+        ).focus();
         return false;
       }
       if (!correo) {
-        showToast('Por favor ingresa tu correo electrónico.', 'error');
-        (document.getElementById('contacto-correo') as HTMLInputElement).focus();
+        showToast("Por favor ingresa tu correo electrónico.", "error");
+        (
+          document.getElementById("contacto-correo") as HTMLInputElement
+        ).focus();
         return false;
       }
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(correo)) {
-        showToast('El formato de correo no es válido.', 'error');
-        (document.getElementById('contacto-correo') as HTMLInputElement).focus();
+        showToast("El formato de correo no es válido.", "error");
+        (
+          document.getElementById("contacto-correo") as HTMLInputElement
+        ).focus();
         return false;
       }
       if (!mensaje) {
-        showToast('Por favor escribe un mensaje.', 'error');
-        (document.getElementById('contacto-mensaje') as HTMLTextAreaElement).focus();
+        showToast("Por favor escribe un mensaje.", "error");
+        (
+          document.getElementById("contacto-mensaje") as HTMLTextAreaElement
+        ).focus();
         return false;
       }
       return true;
     }
 
     // ── Submit handler ──
-    form.addEventListener('submit', async (e) => {
+    form.addEventListener("submit", async (e) => {
       e.preventDefault();
 
       if (!validateForm()) return;
@@ -627,29 +645,41 @@
       `;
 
       const data = {
-        nombre: (document.getElementById('contacto-nombre') as HTMLInputElement).value,
-        correo: (document.getElementById('contacto-correo') as HTMLInputElement).value,
-        telefono: (document.getElementById('contacto-telefono') as HTMLInputElement).value,
-        mensaje: (document.getElementById('contacto-mensaje') as HTMLTextAreaElement).value,
+        nombre: (document.getElementById("contacto-nombre") as HTMLInputElement)
+          .value,
+        correo: (document.getElementById("contacto-correo") as HTMLInputElement)
+          .value,
+        telefono: (
+          document.getElementById("contacto-telefono") as HTMLInputElement
+        ).value,
+        mensaje: (
+          document.getElementById("contacto-mensaje") as HTMLTextAreaElement
+        ).value,
       };
 
       try {
-        const response = await fetch('/api/contact', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+        const response = await fetch("/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify(data),
         });
 
         const result = await response.json();
 
         if (response.ok && result.success) {
-          showToast('¡Mensaje enviado con éxito! Nos pondremos en contacto pronto.', 'success');
+          showToast(
+            "¡Mensaje enviado con éxito! Nos pondremos en contacto pronto.",
+            "success",
+          );
           form.reset();
         } else {
-          showToast(result.error || 'Error al enviar el mensaje. Inténtalo de nuevo.', 'error');
+          showToast(
+            result.error || "Error al enviar el mensaje. Inténtalo de nuevo.",
+            "error",
+          );
         }
       } catch {
-        showToast('Error de conexión. Por favor inténtalo más tarde.', 'error');
+        showToast("Error de conexión. Por favor inténtalo más tarde.", "error");
       } finally {
         submitBtn.disabled = false;
         submitBtn.innerHTML = originalBtnHTML;
@@ -660,7 +690,9 @@
 
 <style is:global>
   @keyframes contacto-spin {
-    to { transform: rotate(360deg); }
+    to {
+      transform: rotate(360deg);
+    }
   }
   .spin-icon {
     animation: contacto-spin 0.8s linear infinite;
