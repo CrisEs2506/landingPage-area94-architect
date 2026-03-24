@@ -10,7 +10,7 @@ const projectsData = [
   { id: 'edificio_importika', name: 'Edificio Importika' },
   { id: 'glamping_portachuelo', name: 'Glamping Portachuelo' },
   { id: 'heladeria_clubCam_elRancho', name: 'Heladería Club Camp.' },
-  { id: 'vestidores_clubCam_elRancho', name: 'Vestidores Club Camp.' },
+  //{ id: 'vestidores_clubCam_elRancho', name: 'Vestidores Club Camp.' },
   { id: 'banos_clubCam_elRancho', name: 'Baños Club Campestre' },
 ];
 
@@ -112,7 +112,7 @@ const projects = projectsData.map((proj, index) => {
 
 <style>
   .proyectos-section {
-    padding: 28px; /* Mismo padding base que .hero-wrapper */
+    padding: 10px 16px; /* Mismo padding base que .hero-wrapper */
     background-color: var(--bg);
     display: flex;
     justify-content: center;
@@ -129,9 +129,9 @@ const projects = projectsData.map((proj, index) => {
 
   .proyectos-content {
     background-color: var(--primary); /* Fondo oscuro del slider general */
-    border-radius: 4px;
-    padding-top: 40px;
-    padding-bottom: 40px;
+    border-radius: 4px; /* Restaurado a 4px */
+    padding-top: 20px;
+    padding-bottom: 28px;
     color: var(--accent);
     width: 100%;
     max-width: 100%;
@@ -140,7 +140,7 @@ const projects = projectsData.map((proj, index) => {
   }
 
   .proyectos-header {
-    padding: 0 32px 32px 32px;
+    padding: 0 32px 20px 32px;
     margin: 0 auto;
   }
 
@@ -163,9 +163,9 @@ const projects = projectsData.map((proj, index) => {
   }
 
   .swiper-slide {
-    height: 70vh; /* Slide alto como en la referencia */
-    min-height: 500px;
-    max-height: 800px;
+    height: 55vh; /* Altura significativamente más controlada (antes 70vh) */
+    min-height: 500px; /* Reducido de 500px */
+    max-height: 600px; /* Reducido de 800px */
   }
 
   .proyecto-card {
@@ -322,7 +322,7 @@ const projects = projectsData.map((proj, index) => {
 
   .modal-content {
     width: 100%;
-    max-width: 1200px; /* Ancho máximo de las imágenes */
+    max-width: 900px; /* Ancho máximo de las imágenes reducido */
     margin: 0 auto;
     padding: 64px 20px;
     display: flex;

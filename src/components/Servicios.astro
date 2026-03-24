@@ -11,11 +11,17 @@
         <!-- Tarjeta 1 -->
         <div class="swiper-slide">
           <div class="servicio-card card-light" tabindex="0">
-            <h3 class="card-title">Arquitectura y Construcción</h3>
+            <h3 class="card-title">
+              Estudio Inmobiliario y Viabilidad Jurídica
+            </h3>
             <p class="card-desc">
-              Construimos tu obra nueva desde la planificación hasta la entrega
-              final, garantizando calidad, cumplimiento y eficiencia.
+              Analizamos títulos a nivel jurídico y urbano para identificar
+              riesgos, viabilidad y valor real de la inversión.
             </p>
+            <ul class="card-list">
+              <li>Estudio jurídico de títulos</li>
+              <li>Estudio urbano de títulos</li>
+            </ul>
             <div class="card-icon" aria-hidden="true">
               <svg
                 width="20"
@@ -37,11 +43,16 @@
         <!-- Tarjeta 2 -->
         <div class="swiper-slide">
           <div class="servicio-card card-dark" tabindex="0">
-            <h3 class="card-title">Gestión de Licencias Urbanísticas</h3>
+            <h3 class="card-title">Reparaciones Locativas</h3>
             <p class="card-desc">
-              Acompañamos la ejecución de tu obra desde la planificación hasta
-              la entrega, asegurando calidad, cumplimiento y eficiencia.
+              Convertimos las reparaciones locativas en una herramienta de
+              inversión para aumentar valorización, retorno y rentabilidad.
             </p>
+            <ul class="card-list">
+              <li>Valorización del inmueble</li>
+              <li>Mejora para renta o venta</li>
+              <li>Optimización funcional</li>
+            </ul>
             <div class="card-icon" aria-hidden="true">
               <svg
                 width="20"
@@ -63,13 +74,16 @@
         <!-- Tarjeta 3 -->
         <div class="swiper-slide">
           <div class="servicio-card card-light" tabindex="0">
-            <h3 class="card-title">
-              Estudio Inmobiliario y Viabilidad Jurídica
-            </h3>
+            <h3 class="card-title">Arquitectura y Construcción</h3>
             <p class="card-desc">
-              Analizamos antecedentes registrales y normativos, identificando
-              riesgos y oportunidades para el desarrollo de tu inversión.
+              Desarrollamos diseños, estudios y ejecución de proyectos para
+              transformar inmuebles en activos con mayor valor.
             </p>
+            <ul class="card-list">
+              <li>Ejecución de proyectos</li>
+              <li>Diseños</li>
+              <li>estudios inmobiliarios</li>
+            </ul>
             <div class="card-icon" aria-hidden="true">
               <svg
                 width="20"
@@ -91,11 +105,21 @@
         <!-- Tarjeta 4 -->
         <div class="swiper-slide">
           <div class="servicio-card card-dark" tabindex="0">
-            <h3 class="card-title">Reparaciones Locativas</h3>
+            <h3 class="card-title">Gestión de Licencias Urbanísticas</h3>
             <p class="card-desc">
-              Renovamos, adecuamos y mejoramos espacios existentes, combinando
-              diseño funcional con acabados de alto nivel.
+              Gestionamos licencias y trámites urbanísticos para dar viabilidad
+              técnica, normativa y comercial al proyecto.
             </p>
+            <ul class="card-list">
+              <li>Obra nueva</li>
+              <li>Urbanismo</li>
+              <li>Parcelismo</li>
+              <li>Reconocimiento</li>
+              <li>Modificaciones</li>
+              <li>Revalidaciones</li>
+              <li>Uso de suelo</li>
+              <li>Consulta normativa</li>
+            </ul>
             <div class="card-icon" aria-hidden="true">
               <svg
                 width="20"
@@ -128,7 +152,7 @@
 
 <style>
   .servicios-section {
-    padding: 64px 32px;
+    padding: 20px 32px;
     background-color: var(--bg);
     display: flex;
     justify-content: center;
@@ -139,7 +163,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 30px;
   }
 
   .section-title {
@@ -228,12 +252,41 @@
   .card-light .card-desc {
     color: var(--secondary);
   }
+  .card-light .card-list li {
+    color: var(--primary); /* Tono más un fuerte / oscuro */
+  }
 
   .card-dark .card-desc {
     color: rgba(255, 255, 255, 0.75);
   }
+  .card-dark .card-list li {
+    color: var(--accent); /* Blanco puro más destacado */
+  }
+
+  .card-list {
+    list-style: none;
+    padding: 0;
+    margin: 16px 0 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .card-list li {
+    font-size: 14px;
+    font-weight: 500; /* Semi-bold / Softer bold */
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .card-list li::before {
+    content: "•";
+    color: #c9a96e; /* Using the gold/accent color from contact */
+  }
 
   .card-icon {
+    margin-top: 10px;
     margin-top: auto;
     align-self: flex-end;
     width: 44px;
@@ -263,7 +316,8 @@
   @media (max-width: 1199px) {
     /* Tablet */
     .servicios-section {
-      padding: 40px 16px;
+      padding: 20px 16px;
+      padding-top: 16px;
     }
     .servicios-container {
       gap: 32px;
@@ -283,7 +337,9 @@
   @media (max-width: 767px) {
     /* Mobile */
     .servicios-section {
-      padding: 24px 16px;
+      padding: 20px;
+      padding-top: 16px;
+      padding-bottom: 16px;
     }
     .servicios-container {
       gap: 24px;
@@ -293,9 +349,10 @@
     }
     .section-subtitle {
       font-size: 14px;
-      text-align: center;
-      margin: 0 auto;
+      text-align: left;
+      margin: 0;
       max-width: 100%;
+      padding-left: 3px;
     }
     .servicio-card {
       padding: 24px;
@@ -317,7 +374,7 @@
       spaceBetween: 16,
       grabCursor: true,
       loop: true,
-      speed: 1500, /* Transición suave y lenta */
+      speed: 1500 /* Transición suave y lenta */,
       autoplay: {
         delay: 3000,
         disableOnInteraction: false,
