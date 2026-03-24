@@ -1,4 +1,4 @@
-import type { APIRoute } from 'astro';
+/*import type { APIRoute } from 'astro';
 import nodemailer from 'nodemailer';
 
 export const prerender = false;
@@ -110,7 +110,7 @@ export const POST: APIRoute = async ({ request }) => {
   }
 };
 
-/** Escapa caracteres HTML para prevenir inyección XSS. */
+/** Escapa caracteres HTML para prevenir inyección XSS.
 function escapeHtml(str: string): string {
   return str
     .replace(/&/g, '&amp;')
@@ -119,3 +119,4 @@ function escapeHtml(str: string): string {
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#039;');
 }
+*/
